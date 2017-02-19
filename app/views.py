@@ -82,8 +82,11 @@ def filelisting():
     print rootdir
     for subdir, dirs, files in os.walk(rootdir + '/static/uploads'):
         for file in files:
-            print os.path.join(subdir, file) 
-            file_list.append(os.path.join(subdir, file))
+            if file.rsplit('.', 1)[1] == 'jpg':
+                print file 
+            else:
+                print os.path.join(subdir, file) 
+                file_list.append(os.path.join(subdir, file))
             
     return render_template('filelisting.html', list=file_list)
 
