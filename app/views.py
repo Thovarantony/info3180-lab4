@@ -71,6 +71,18 @@ def send_text_file(file_name):
     """Send your static text file."""
     file_dot_text = file_name + '.txt'
     return app.send_static_file(file_dot_text)
+    
+@app.route('/filelisting')
+def filelisting():
+    file_list = []
+    rootdir = os.getcwd()
+    print rootdir
+    for subdir, dirs, files in os.walk(rootdir + '/static/uploads'):
+        for file in files:
+            print os.path.join(subdir, file) 
+            file_list.append(os.path.join(subdir, file)
+            
+    return render_template('login.html', error=error)
 
 
 @app.after_request
