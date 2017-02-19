@@ -74,15 +74,18 @@ def send_text_file(file_name):
     
 @app.route('/filelisting')
 def filelisting():
+    if not session.get('logged_in'):
+        abort(401)
+        
     file_list = []
     rootdir = os.getcwd()
     print rootdir
     for subdir, dirs, files in os.walk(rootdir + '/static/uploads'):
         for file in files:
             print os.path.join(subdir, file) 
-            file_list.append(os.path.join(subdir, file)
+            file_list.append(os.path.join(subdir, file))
             
-    return render_template('login.html', error=error)
+    return render_template('filelisting.html', list=file_list)
 
 
 @app.after_request
